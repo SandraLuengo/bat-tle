@@ -64,7 +64,7 @@ Bat.prototype.draw = function () {
     ctx.lineWidth = 8;
     ctx.lineJoin = ctx.lineCap = 'round';
     ctx.shadowBlur = 10;
-    ctx.strokeStyle = 'rgb(209, 209, 209)';
+    ctx.strokeStyle = 'rgb(222, 222, 222 )';
     ctx.shadowColor = 'rgb(241, 241, 241)';
     this.arrayFigureXY.push([this.currX, this.currY]);
     ctx.stroke();
@@ -74,7 +74,7 @@ Bat.prototype.draw = function () {
 }
 
 Bat.prototype.changeColor = function (color) {
- 
+
     ctx = this.ctx;
     ctx.beginPath();
     ctx.shadowBlur = 10;
@@ -87,11 +87,33 @@ Bat.prototype.changeColor = function (color) {
     ctx.stroke();
     ctx.closePath();
     ctx.shadowBlur = 0;
-    this.arrayFigureXY.length=0;
+    //this.arrayFigureXY.length = 0;
 }
 
 Bat.prototype.clear = function () {
     ctx = this.ctx;
+    // ctx.beginPath();
+    // ctx.shadowBlur = 10;
+    // ctx.moveTo(this.arrayFigureXY[0][0], this.arrayFigureXY[0][1]);
+    // var cont = 50;
+    // var des = 0.02;
+    // for (var i = 0; i < cont; i++) {
+
+    //     console.log(1 - des)
+    //     this.arrayFigureXY.forEach(function (currentValues) {
+
+    //         ctx.strokeStyle = `rgba(37, 126, 228,0)`;
+    //         ctx.shadowColor = `rgba(37, 126, 228,0)`;
+    //         ctx.lineTo(currentValues[0], currentValues[1]);
+    //         ctx.stroke();
+
+    //     });
+    //     des += 0.02;
+       
+    // }
+    // ctx.closePath();
+    ctx.shadowBlur = 0;
+    this.arrayFigureXY.length = 0;
     ctx.clearRect(0, 0, this.width, this.height);
     this.position.length = 0;
     this.drawBat();
@@ -129,10 +151,10 @@ Bat.prototype.findxy = function (res, e) {
             this.game.killEnemies('horizontal');
             this.changeColor('red');
         }
-        setTimeout(function(){
+        setTimeout(function () {
             this.clear();
-        }.bind(this),500)
-        
+        }.bind(this), 500)
+
 
     }
     if (res == 'move') {
