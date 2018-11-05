@@ -1,0 +1,111 @@
+<html>
+    <script type="text/javascript">
+    var canvas, ctx, flag = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0,
+        dot_flag = false;
+
+    var position=[];
+    var clientCoords=[];
+
+    var x = "blue",
+        y = 2;
+    
+    function init() {
+        canvas = document.getElementById('can');
+        ctx = canvas.getContext("2d");
+        w = canvas.width;
+        h = canvas.height;
+    
+        canvas.addEventListener("mousemove", function (e) {
+            findxy('move', e)
+        }, false);
+        canvas.addEventListener("mousedown", function (e) {
+            findxy('down', e)
+        }, false);
+        canvas.addEventListener("mouseup", function (e) {
+            findxy('up', e)
+        }, false);
+        canvas.addEventListener("mouseout", function (e) {
+            findxy('out', e)
+        }, false);
+    }
+    
+    
+    
+    function draw() {
+    	
+    	ctx.beginPath();
+        ctx.moveTo(prevX, prevY);
+  	
+        ctx.lineTo(currX, currY);
+        ctx.strokeStyle = x;
+        ctx.lineWidth = y;
+        ctx.stroke();
+        ctx.closePath();
+    }
+    
+    function clear() {        
+            ctx.clearRect(0, 0, w, h);
+            position.length=0;
+    }
+    
+    function findxy(res, e) {
+        if (res == 'down') {
+            prevX = currX;
+            prevY = currY;
+            currX = e.clientX - canvas.offsetLeft;
+            currY = e.clientY - canvas.offsetTop;
+    
+            flag = true;
+            dot_flag = true;
+            if (dot_flag) {
+                ctx.beginPath();
+                ctx.fillStyle = x;
+                ctx.fillRect(currX, currY, 2, 2);
+                ctx.closePath();
+                dot_flag = false;
+            }
+        }
+        if (res == 'up') {
+            flag = false;
+            //console.log(position);
+            isLine();
+            clear();
+        }
+        if (res == 'move') {
+            if (flag) {
+                prevX = currX;
+                prevY = currY;
+                currX = e.clientX - canvas.offsetLeft;
+                currY = e.clientY - canvas.offsetTop;
+                clientCoords={prevX,prevY};
+                // console.log(clientCoords.prevX);
+                // console.log(clientCoords.prevY);
+        		position.push(clientCoords);
+                draw();
+            }
+        }
+    }
+    function isLine(){
+        var initialX=position[0].prevX;
+        var initialY=position[0].prevY;
+
+        var endX=position[position.length-1].prevX;
+        var endY=position[position.length-1].prevY;
+
+        var arrayInterval=[endX-50,endX+50];
+
+        if( (initialY<endY) && (initialX>arrayInterval[0] && initialX<arrayInterval[1]) ){
+            console.log('TRAZO DESCENDENTE');
+        } else if( (initialY>endY) && (initialX>arrayInterval[0] && initialX<arrayInterval[1])){
+            console.log('TRAZO ASCENDENTE');
+        }
+    }
+    </script>
+    <body onload="init()">
+        <canvas id="can" width="900" height="600" style="position:absolute;top:10%;left:10%;border:2px solid;"></canvas>
+    </body>
+    </html>
