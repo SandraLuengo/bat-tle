@@ -11,7 +11,7 @@
     var clientCoords=[];
 
     var x = "blue",
-        y = 2;
+        y = 6;
     
     function init() {
         canvas = document.getElementById('can');
@@ -43,6 +43,7 @@
         ctx.lineTo(currX, currY);
         ctx.strokeStyle = x;
         ctx.lineWidth = y;
+        ctx.lineCap="round";
         ctx.stroke();
         ctx.closePath();
     }
@@ -71,8 +72,10 @@
         }
         if (res == 'up') {
             flag = false;
-            //console.log(position);
-            isLine();
+            isVerticalLine();
+            isHorizontalLine();
+            isPositiveTriangle();
+            isNegativeTriangle();
             clear();
         }
         if (res == 'move') {
@@ -87,7 +90,7 @@
             }
         }
     }
-    function isLine(){
+    function isVerticalLine(){
         var initialX=position[0].prevX;
         var initialY=position[0].prevY;
 
@@ -96,11 +99,42 @@
 
         var arrayInterval=[endX-50,endX+50];
 
-        if( (initialY<endY) && (initialX>arrayInterval[0] && initialX<arrayInterval[1]) ){
-            console.log('TRAZO DESCENDENTE');
-        } else if( (initialY>endY) && (initialX>arrayInterval[0] && initialX<arrayInterval[1])){
-            console.log('TRAZO ASCENDENTE');
+        if( ((initialY<endY) || (initialY>endY) ) && (initialX>arrayInterval[0] && initialX<arrayInterval[1]) ){
+            console.log('VERTICAL LINE');
         }
+    }
+    function isHorizontalLine(){
+        var initialX=position[0].prevX;
+        var initialY=position[0].prevY;
+
+        var endX=position[position.length-1].prevX;
+        var endY=position[position.length-1].prevY;
+
+        var arrayInterval=[endY-50,endY+50];
+
+        if( ((initialX<endX) || (initialX>endX) ) && (initialY>arrayInterval[0] && initialY<arrayInterval[1]) ){
+            console.log('HORIZONTAL LINE');
+        }
+    }
+    function isPositiveTriangle(){
+
+        var initialX=position[0].prevX;
+        var initialY=position[0].prevY;
+
+        var endX=position[position.length-1].prevX;
+        var endY=position[position.length-1].prevY;
+
+        var arrayIntervalX=[initialX-50,initialX+50];
+        var arrayIntervalY=[initialY-50,initialY+50];
+
+        if((endX>arrayIntervalX[0] && endX<arrayIntervalX[1]) && (endY>arrayIntervalY[0] && endY<arrayIntervalY[1])) {
+            
+            console.log('empiezo y acabo en el mismo punto');
+
+        }
+    }
+    function isNegativeTriangle(){
+
     }
     </script>
     <body onload="init()">
