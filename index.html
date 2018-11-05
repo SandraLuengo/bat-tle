@@ -72,10 +72,18 @@
         }
         if (res == 'up') {
             flag = false;
-            isVerticalLine();
-            isHorizontalLine();
-            isPositiveTriangle();
-            isNegativeTriangle();
+            // isVerticalLine();
+            // isHorizontalLine();
+            if(isPositiveTriangle()){
+                console.log('POSITIVE TRIANGLE');
+            }else if(isNegativeTriangle()){
+                console.log('NEGATIVE TRIANGLE');
+            }else if(isVerticalLine()){
+                console.log('VERTICAL LINE');
+            }else if(isHorizontalLine()){
+                console.log('HORIZONTAL LINE');
+            }
+            
             clear();
         }
         if (res == 'move') {
@@ -99,9 +107,10 @@
 
         var arrayInterval=[endX-50,endX+50];
 
-        if( ((initialY<endY) || (initialY>endY) ) && (initialX>arrayInterval[0] && initialX<arrayInterval[1]) ){
-            console.log('VERTICAL LINE');
-        }
+        if( ((initialY<endY) || (initialY>endY) ) && (initialX>arrayInterval[0] && initialX<arrayInterval[1]) )  return true;
+
+        return false;
+        
     }
     function isHorizontalLine(){
         var initialX=position[0].prevX;
@@ -112,11 +121,10 @@
 
         var arrayInterval=[endY-50,endY+50];
 
-        if( ((initialX<endX) || (initialX>endX) ) && (initialY>arrayInterval[0] && initialY<arrayInterval[1]) ){
-            console.log('HORIZONTAL LINE');
-        }
+        if( ((initialX<endX) || (initialX>endX) ) && (initialY>arrayInterval[0] && initialY<arrayInterval[1]) ) return true;
+        return false;
     }
-    function isPositiveTriangle(){
+    function isNegativeTriangle(){
 
         var initialX=position[0].prevX;
         var initialY=position[0].prevY;
@@ -124,17 +132,31 @@
         var endX=position[position.length-1].prevX;
         var endY=position[position.length-1].prevY;
 
-        var arrayIntervalX=[initialX-50,initialX+50];
-        var arrayIntervalY=[initialY-50,initialY+50];
+        var middyX = position[Math.floor(position.length/2)].prevX;
+        var middyY = position[Math.floor(position.length/2)].prevY;
 
-        if((endX>arrayIntervalX[0] && endX<arrayIntervalX[1]) && (endY>arrayIntervalY[0] && endY<arrayIntervalY[1])) {
-            
-            console.log('empiezo y acabo en el mismo punto');
+        var arrayInterval=[endY-50,endY+50];
 
-        }
+        if((initialY>arrayInterval[0] && initialY<arrayInterval[1]) && (middyY>initialY && middyY>endY) && (middyX>initialX && middyX<endX) ) return true;
+
+        return false;
     }
-    function isNegativeTriangle(){
+    function isPositiveTriangle(){
+       
+        var initialX=position[0].prevX;
+        var initialY=position[0].prevY;
 
+        var endX=position[position.length-1].prevX;
+        var endY=position[position.length-1].prevY;
+
+        var middyX = position[Math.floor(position.length/2)].prevX;
+        var middyY = position[Math.floor(position.length/2)].prevY;
+
+        var arrayInterval=[endY-50,endY+50];
+
+        if((initialY>arrayInterval[0] && initialY<arrayInterval[1]) && (middyY<initialY && middyY<endY) && (middyX>initialX && middyX<endX) ) return true;
+
+        return false;
     }
     </script>
     <body onload="init()">
