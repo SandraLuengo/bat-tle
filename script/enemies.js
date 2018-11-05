@@ -1,9 +1,9 @@
-function Enemy(ctx,width,height){
+function Enemy(ctx,width,height,posX,posY){
     this.ctx = ctx;
     this.canvasWidth = width;
     this.canvasHeight = height;
-    this.positionX = 50;
-    this.positionY = 50;
+    this.positionX = posX;
+    this.positionY = posY;
     this.raccoonWidth=100;
     this.raccoonHeight=90;
     this.dx=5;
