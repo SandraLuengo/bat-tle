@@ -84,6 +84,11 @@ Canvas.prototype.killEnemies = function (move) {
 
             return true;
         } else {
+            this.bat.points++;
+            console.log( this.bat.points)
+            if(this.bat.points===60){
+                alert('win');
+            }
             return false;
         }
     }.bind(this))

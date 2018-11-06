@@ -37,7 +37,7 @@ Enemy.prototype.move = function () {
         }
         if(this.positionX >370){
 
-            this.positionX -= this.vx;
+            this.positionX -= this.vx*2;
         }
         this.positionY += this.dy;
     } else if (this.positionAttack == 'right') {
