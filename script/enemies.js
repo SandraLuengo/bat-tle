@@ -6,7 +6,7 @@ function Enemy(ctx,width,height,posX,posY){
     this.positionY = posY;
     this.raccoonWidth=100;
     this.raccoonHeight=90;
-    this.dx=5;
+    this.dx=0.4;
     this.img = new Image();
     this.img.src = 'img/raccoon1.png';
     this.imgLine = new Image();
@@ -25,7 +25,8 @@ Enemy.prototype.draw = function () {
 };
 
 Enemy.prototype.move = function () {
-    console.log('me muevo');
     this.positionX -= this.dx;
 };
-
+// Enemy.prototype.clear = function () {
+//     this.ctx.clearRect( this.positionX,  this.positionY, this.raccoonWidth, this.raccoonHeight);
+// };

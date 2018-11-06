@@ -10,6 +10,7 @@ window.onload = function () {
 
     function startGame() {
         var canvas = new Canvas("myCanvas");
+        var canvasDraw = new CanvasDraw("myCanvasDraw",canvas);
 
     }
 };

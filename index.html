@@ -6,17 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GAME</title>
-    <script src=script/bat.js> </script>
-    <script src=script/enemies.js> </script>
-    <script src=script/canvas.js> </script>
-    <script src="script/script.js"></script>
+    <script src=script/bat.js> </script> <script src=script/enemies.js> </script> <script src=script/canvas.js> </script>
+    <script src=script/canvasDraw.js> </script>
+        <script src="script/script.js"></script>
 
     <title>Document</title>
 </head>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-image: url('img/background.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    canvas {
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        margin-left: -415px;
+        background: grey;
+    }
+    #myCanvasDraw{
+        z-index: 99;
+        background: transparent;
+    }
+</style>
 
 <body>
     <button id='start-button'>START</button>
-    <canvas id="myCanvas" width="900" height="600" style="position:absolute;top:10%;left:10%;background:white;"></canvas>
+    <canvas id="myCanvas" width="830" height="400" ></canvas>
+    <canvas id="myCanvasDraw" width="830" height="400" ></canvas>
 </body>
 
 </html>
