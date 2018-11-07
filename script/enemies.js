@@ -13,7 +13,7 @@ function Enemy(canvas, ctx, width, height, posX, posY, positionAttack) {
     this.vx = 0.1;
     this.positionAttack = positionAttack;
     this.img = new Image();
-    this.img.src = 'img/raccoon1.png';
+    this.img.src = 'img/raccoonBad.png';
     this.imgLine = new Image();
     this.srcArray = [{ src: 'img/verticaLine.png', width: 10 }, { src: 'img/horizontaLine.png', width: 35 }, { src: 'img/negativeTriangle.png', width: 30 }, { src: 'img/positiveTriangle.png', width: 30 }];
     this.imgLineInfo = this.srcArray[Math.floor(Math.random() * this.srcArray.length)];

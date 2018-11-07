@@ -77,6 +77,24 @@ Canvas.prototype.killEnemies = function (move) {
             break;
     }
 
+    this.bat.batWidth = 600;
+    this.bat.batPositionY = 160;
+    this.bat.frames = 6;
+    this.bat.velFrames = 16;
+    this.bat.numFramesMenosUno = 5;
+    this.bat.img.src = 'img/attack.png';
+
+    setTimeout(function () {
+
+        this.bat.batWidth = 800;
+        this.bat.batPositionY = 200;
+        this.bat.frames = 8;
+        this.bat.velFrames = 12;
+        this.bat.numFramesMenosUno = 7;
+        this.bat.img.src = 'img/8_bats_parpado.png';
+       
+    }.bind(this), 1000)
+
     this.enemies = this.enemies.filter(function (enemy) {
         // debugger
 
@@ -85,8 +103,8 @@ Canvas.prototype.killEnemies = function (move) {
             return true;
         } else {
             this.bat.points++;
-            console.log( this.bat.points)
-            if(this.bat.points===60){
+            console.log(this.bat.points)
+            if (this.bat.points === 60) {
                 alert('win');
             }
             return false;
