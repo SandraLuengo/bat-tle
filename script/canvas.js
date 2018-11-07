@@ -41,13 +41,36 @@ Canvas.prototype.init = function () {
         }
 
         if (this.bat.life === 0) {
-            clearInterval(idInterval)
-            alert('muerto');
+            clearInterval(idInterval);
+            this.fin();
         }
 
     }.bind(this), 1000 / this.fps);
 
 
+}
+Canvas.prototype.fin = function () {
+    this.bat.batWidth = 400;
+    this.bat.frameIndex = 0;
+    this.bat.batPositionY = 200;
+    this.bat.frames = 4;
+    this.bat.velFrames = 12;
+    this.bat.numFramesMenosUno = 3;
+    this.bat.img.src = 'img/bat_die.png';
+    this.enemies.length = 0;
+    muerto = true;
+    var x = setInterval(function () {
+        this.framesCounter++;
+        //debugger
+        this.clear();
+        this.bat.drawBat();
+        console.log('entro')
+
+    }.bind(this), 1000 / this.fps);
+
+    setTimeout(function () {
+        clearInterval(x);
+    }.bind(this), 1000)
 }
 Canvas.prototype.drawAll = function () {
 
@@ -89,27 +112,29 @@ Canvas.prototype.killEnemies = function (move) {
         this.bat.batWidth = 800;
         this.bat.batPositionY = 200;
         this.bat.frames = 8;
-        this.bat.velFrames = 12;
+        this.bat.velFrames = 20;
         this.bat.numFramesMenosUno = 7;
-        this.bat.img.src = 'img/8_bats_parpado.png';
-       
-    }.bind(this), 1000)
+        this.bat.img.src = 'img/8_bats.png';
 
-    this.enemies = this.enemies.filter(function (enemy) {
-        // debugger
 
-        if (enemy.imgLineInfo.src !== enemyType) {
 
-            return true;
-        } else {
-            this.bat.points++;
-            console.log(this.bat.points)
-            if (this.bat.points === 60) {
-                alert('win');
+        this.enemies = this.enemies.filter(function (enemy) {
+            // debugger
+
+            if (enemy.imgLineInfo.src !== enemyType) {
+
+                return true;
+            } else {
+                this.bat.points++;
+                console.log(this.bat.points)
+                if (this.bat.points === 60) {
+                    alert('win');
+                }
+                return false;
             }
-            return false;
-        }
-    }.bind(this))
+        }.bind(this))
+
+    }.bind(this), 1000)
 }
 Canvas.prototype.generateEnemy = function () {
 
@@ -150,18 +175,18 @@ Canvas.prototype.generateEnemy = function () {
 };
 
 Canvas.prototype.isCollision = function () {
-
     // colisiones genéricas 
     // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
     return this.enemies.some(function (enemy, i) {
         //debugger
         if (enemy.positionX + enemy.raccoonWidth >= this.bat.batPositionX &&
-            this.bat.batPositionX + this.bat.batWidth > enemy.positionX &&
+            this.bat.batPositionX + this.bat.batWidth/this.bat.frames > enemy.positionX &&
             enemy.raccoonHeight + enemy.positionY >= this.bat.batPositionY + 25) {
+            console.log(this.bat.batPositionX +'-'+ this.bat.batWidth);
             this.enemies.splice(i, 1);
             return true
         } else {
             return false;
         }
     }.bind(this));
-};
+}; 

@@ -20,7 +20,7 @@ function Bat(ctx, canvas, canvasWidth, canvasHeight, game) {
     this.numFramesMenosUno=7;
     //this.drawBat();
     this.img = new Image();
-      this.img.src = 'img/8_bats_parpado.png';
+      this.img.src = 'img/8_bats.png';
     //this.img.src = 'img/attack.png';
 
 }

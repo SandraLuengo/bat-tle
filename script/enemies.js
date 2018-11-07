@@ -32,7 +32,7 @@ Enemy.prototype.draw = function () {
 Enemy.prototype.move = function () {
     if (this.positionAttack == 'top') {
         
-        if ( this.positionX<290) {
+        if ( this.positionX<340) {
             this.positionX += this.vx;
         }
         if(this.positionX >370){
