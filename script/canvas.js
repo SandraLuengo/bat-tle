@@ -11,6 +11,8 @@ function Canvas(id) {
     this.enemies = [];
     this.enemy = new Enemy(this.ct, this.width, this.height, 0, 0, this)
     this.framesCounter = 0;
+    this.imgBackground = new Image();
+    this.imgBackground.src = 'img/fondo.png';
     this.init();
 }
 Canvas.prototype.contentInit=function(){
@@ -38,6 +40,7 @@ Canvas.prototype.contentInit=function(){
 
     if (this.bat.life === 0) {
         clearInterval(this.idInterval);
+       
         this.end();
     }
 
@@ -57,24 +60,36 @@ Canvas.prototype.end = function () {
     this.enemies.length = 0;
 
     var endInterval = setInterval(function () {
+        
         this.framesCounter++;
         this.clear();
+        this.drawBackground();
         this.bat.drawBat();
 
     }.bind(this), 1000 / this.fps);
 
     setTimeout(function () {
+        // debugger
         clearInterval(endInterval);
-    }.bind(this), 700)
+        clearInterval(this.idInterval);
+    }.bind(this), 133)
 }
 Canvas.prototype.drawAll = function () {
+    this.drawBackground();
 
     this.bat.drawBat();
+    
     this.enemies.forEach(function (enemy) { enemy.draw() });
 }
 Canvas.prototype.clear = function () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
+
+Canvas.prototype.drawBackground = function(){
+    this.ctx.drawImage(this.imgBackground, 0, 0, this.canvas.width, this.canvas.height);
+   
+}
+
 
 Canvas.prototype.killEnemies = function (move) {
     var enemyType;
@@ -96,27 +111,6 @@ Canvas.prototype.killEnemies = function (move) {
     }
     this.framesCounter = 0;
     this.bat.changeFrames(600, 160, 6, 20, 5, 'img/attack.png');
-
-    // clearInterval(this.idInterval);
-
-    // var damageBat = setInterval(function () {
-    //     this.framesCounter++;
-    //     this.clear();
-    //     this.bat.drawBat();
-    //     this.enemies.forEach(function (enemy) { enemy.draw() });
-
-    // }.bind(this), 1000 / this.fps);
-
-
-    // setTimeout(function () {
-
-    //     clearInterval(damageBat);
-    //     this.idInterval= setInterval(function(){
-    //         this.contentInit();
-    //     }.bind(this),1000 / this.fps);
-    //     this.bat.changeFrames(400, 200, 4, 17, 3, 'img/8_bats.png');
-
-    // }.bind(this),1000);
 
     setTimeout(function () {
         this.framesCounter = 0;
@@ -196,6 +190,7 @@ Canvas.prototype.isCollision = function () {
             var damageBat = setInterval(function () {
                 this.framesCounter++;
                 this.clear();
+                this.drawBackground();
                 this.bat.drawBat();
                 this.enemies.forEach(function (enemy) { enemy.draw() });
         

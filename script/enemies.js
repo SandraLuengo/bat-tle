@@ -31,7 +31,7 @@ function Enemy(canvas, ctx, width, height, posX, posY, positionAttack) {
 Enemy.prototype.draw = function () {
     this.imgLine.src = this.imgLineInfo.src;
     this.iconWidth = this.imgLineInfo.width;
-    this.ctx.globalCompositeOperation = 'darken';
+    //this.ctx.globalCompositeOperation = 'darken';
     this.ctx.drawImage(this.imgLine, this.positionX + (this.raccoonWidth / 2), this.positionY - 25, this.iconWidth, 20);
 
 
