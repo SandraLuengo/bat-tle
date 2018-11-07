@@ -51,7 +51,7 @@ Bat.prototype.animateImg = function () {
     }
 };
 Bat.prototype.changeFrames = function (batWidth, batPositionY, frames, velFrames, numFramesMenosUno, src) {
-
+    
     this.batWidth = batWidth;
     this.batPositionY = batPositionY;
     this.frames = frames;
