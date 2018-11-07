@@ -16,11 +16,11 @@ function Bat(ctx, canvas, canvasWidth, canvasHeight, game) {
     //no auto llamar desde el constructor
     this.frames = 8;
     this.frameIndex = 0;
-    this.velFrames=7;
-    this.numFramesMenosUno=7;
+    this.velFrames = 7;
+    this.numFramesMenosUno = 7;
     //this.drawBat();
     this.img = new Image();
-      this.img.src = 'img/8_bats.png';
+    this.img.src = 'img/8_bats.png';
     //this.img.src = 'img/attack.png';
 
 }
@@ -50,3 +50,13 @@ Bat.prototype.animateImg = function () {
         if (this.frameIndex > this.numFramesMenosUno) this.frameIndex = 0;
     }
 };
+Bat.prototype.changeFrames = function (batWidth, batPositionY, frames, velFrames, numFramesMenosUno, src) {
+
+    this.batWidth = batWidth;
+    this.batPositionY = batPositionY;
+    this.frames = frames;
+    this.velFrames = velFrames;
+    this.numFramesMenosUno = numFramesMenosUno;
+    this.img.src = src;
+
+}

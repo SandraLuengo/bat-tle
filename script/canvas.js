@@ -9,7 +9,7 @@ function Canvas(id) {
     this.height = 600;
     this.bat = new Bat(this.ctx, this.canvas, this.width, this.height, this);
     this.enemies = [];
-    this.enemy = new Enemy(this.ct, this.width, this.height, 0, 0)
+    this.enemy = new Enemy(this.ct, this.width, this.height, 0, 0,this)
     this.framesCounter = 0;
     this.init();
 }
@@ -24,10 +24,8 @@ Canvas.prototype.init = function () {
             this.framesCounter = 0;
             this.enemy.dx += 0.1;
             this.enemy.dy += 0.1;
-
-            //console.log(this.enemy.dx)
         }
-        if (this.framesCounter % 100 === 0) {
+        if (this.framesCounter % 110 === 0) {
             this.generateEnemy();
         }
 
@@ -42,35 +40,30 @@ Canvas.prototype.init = function () {
 
         if (this.bat.life === 0) {
             clearInterval(idInterval);
-            this.fin();
+            this.end();
         }
 
     }.bind(this), 1000 / this.fps);
 
 
 }
-Canvas.prototype.fin = function () {
-    this.bat.batWidth = 400;
+Canvas.prototype.end = function () {
+
+    this.framesCounter=0;
     this.bat.frameIndex = 0;
-    this.bat.batPositionY = 200;
-    this.bat.frames = 4;
-    this.bat.velFrames = 12;
-    this.bat.numFramesMenosUno = 3;
-    this.bat.img.src = 'img/bat_die.png';
+    this.bat.changeFrames(400, 200, 4, 12, 3, 'img/bat_die.png');
     this.enemies.length = 0;
-    muerto = true;
-    var x = setInterval(function () {
+
+    var endInterval = setInterval(function () {
         this.framesCounter++;
-        //debugger
         this.clear();
         this.bat.drawBat();
-        console.log('entro')
 
     }.bind(this), 1000 / this.fps);
 
     setTimeout(function () {
-        clearInterval(x);
-    }.bind(this), 1000)
+        clearInterval(endInterval);
+    }.bind(this), 700)
 }
 Canvas.prototype.drawAll = function () {
 
@@ -99,28 +92,14 @@ Canvas.prototype.killEnemies = function (move) {
         default:
             break;
     }
-
-    this.bat.batWidth = 600;
-    this.bat.batPositionY = 160;
-    this.bat.frames = 6;
-    this.bat.velFrames = 16;
-    this.bat.numFramesMenosUno = 5;
-    this.bat.img.src = 'img/attack.png';
+    this.framesCounter=0;
+    this.bat.changeFrames(600, 160, 6, 20, 5, 'img/attack.png');
 
     setTimeout(function () {
-
-        this.bat.batWidth = 800;
-        this.bat.batPositionY = 200;
-        this.bat.frames = 8;
-        this.bat.velFrames = 20;
-        this.bat.numFramesMenosUno = 7;
-        this.bat.img.src = 'img/8_bats.png';
-
-
+        this.framesCounter=0;
+        this.bat.changeFrames(800, 200, 8, 7, 7, 'img/8_bats.png');
 
         this.enemies = this.enemies.filter(function (enemy) {
-            // debugger
-
             if (enemy.imgLineInfo.src !== enemyType) {
 
                 return true;
@@ -134,7 +113,7 @@ Canvas.prototype.killEnemies = function (move) {
             }
         }.bind(this))
 
-    }.bind(this), 1000)
+    }.bind(this), 500)
 }
 Canvas.prototype.generateEnemy = function () {
 
@@ -180,10 +159,20 @@ Canvas.prototype.isCollision = function () {
     return this.enemies.some(function (enemy, i) {
         //debugger
         if (enemy.positionX + enemy.raccoonWidth >= this.bat.batPositionX &&
-            this.bat.batPositionX + this.bat.batWidth/this.bat.frames > enemy.positionX &&
-            enemy.raccoonHeight + enemy.positionY >= this.bat.batPositionY + 25) {
-            console.log(this.bat.batPositionX +'-'+ this.bat.batWidth);
+            this.bat.batPositionX +(this.bat.batWidth / this.bat.frames) > enemy.positionX &&
+            (enemy.raccoonHeight / enemy.frames) + enemy.positionY >= this.bat.batPositionY -25) {
+           
             this.enemies.splice(i, 1);
+            this.framesCounter=0;
+            this.bat.changeFrames(400, 160, 4, 17, 3, 'img/batDamage.png');
+
+            setTimeout(function () {
+                this.framesCounter=0;
+                this.bat.changeFrames(800, 200, 8, 7, 7, 'img/8_bats.png');
+            }.bind(this), 700);
+
+
+
             return true
         } else {
             return false;
