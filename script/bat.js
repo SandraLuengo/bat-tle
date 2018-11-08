@@ -11,7 +11,7 @@ function Bat(ctx, canvas, canvasWidth, canvasHeight, game) {
     this.batWidthSmall = 95;
     this.batPositionX = (this.width / 2) - (this.batWidthSmall / 1.2);
     this.batPositionY = 200;
-    this.life = 1;
+    this.life = 3;
     this.points = 0;
     //no auto llamar desde el constructor
     this.frames = 8;
@@ -58,5 +58,6 @@ Bat.prototype.changeFrames = function (batWidth, batPositionY, frames, velFrames
     this.velFrames = velFrames;
     this.numFramesMenosUno = numFramesMenosUno;
     this.img.src = src;
+    this.drawBat();
 
 }

@@ -1,0 +1,16 @@
+0000000000000000000000000000000000000000 2c62148e261ce89245d5ddb71c072cf56d9a6cdc Sandra Luengo <luchosandra@gmail.com> 1541411098 +0100	commit (initial): Iteration 1: draw simple lines
+2c62148e261ce89245d5ddb71c072cf56d9a6cdc 3f409b6426bb69cc054b340b49d49d0e5fa6e293 Sandra Luengo <luchosandra@gmail.com> 1541411230 +0100	commit: iteration 1 - prueba
+3f409b6426bb69cc054b340b49d49d0e5fa6e293 18e00669bad928aa2cab336a549916421b8b43a9 Sandra Luengo <luchosandra@gmail.com> 1541413818 +0100	commit: lineas vertical y horizontal, elimino triangulo por V y V invertida
+18e00669bad928aa2cab336a549916421b8b43a9 6b710ee31796a6e96db21592ab325a46ae9b73b8 Sandra Luengo <luchosandra@gmail.com> 1541415907 +0100	commit: 4 figuras, lineas y Vs
+6b710ee31796a6e96db21592ab325a46ae9b73b8 267ad6ede7fed5d726377faaac2a929645b9a6a2 Sandra Luengo <luchosandra@gmail.com> 1541421387 +0100	commit: Dibujo y reconocimiento de figuras, organizado por clases
+267ad6ede7fed5d726377faaac2a929645b9a6a2 c449428f692eb6cd63d12f13a8b96d2d6bfe4374 Sandra Luengo <luchosandra@gmail.com> 1541439572 +0100	commit: Cambio de color de las lineas al completar las figuras
+c449428f692eb6cd63d12f13a8b96d2d6bfe4374 cf6abe3d86245fb3d5f48263aefe19bee217d3b7 Sandra Luengo <luchosandra@gmail.com> 1541443088 +0100	commit: Solo con un enemigo, desaparec correctamente al pintar su figura
+cf6abe3d86245fb3d5f48263aefe19bee217d3b7 1aad4f69d93fc2fcc32d967bc0e6db1f66819060 Sandra Luengo <luchosandra@gmail.com> 1541445165 +0100	commit: Varios enemigos, no controlados
+1aad4f69d93fc2fcc32d967bc0e6db1f66819060 a95fc3d863e48493df74532f87280161b701b347 Sandra Luengo <luchosandra@gmail.com> 1541505256 +0100	commit: Con trazo y movimiento, dos canvas
+a95fc3d863e48493df74532f87280161b701b347 004ecd7ef96dad2a88f66fd7890afc93698f74a5 Sandra Luengo <luchosandra@gmail.com> 1541524637 +0100	commit: colisiones
+004ecd7ef96dad2a88f66fd7890afc93698f74a5 93ba54f8facadeec1ebe93ba11bc15f25948a160 Sandra Luengo <luchosandra@gmail.com> 1541532427 +0100	commit: movimiento bat
+93ba54f8facadeec1ebe93ba11bc15f25948a160 c21770f7ce916d18083db3ef0b99299cf450c381 Sandra Luengo <luchosandra@gmail.com> 1541592921 +0100	commit: Movimiento muercielago y cambio mapache
+c21770f7ce916d18083db3ef0b99299cf450c381 d39bcb63b63fb9304554f7a1a92ef2130433cab3 Sandra Luengo <luchosandra@gmail.com> 1541601383 +0100	commit: Movimiento + colisiones arregladas
+d39bcb63b63fb9304554f7a1a92ef2130433cab3 3e0060c90e7710d07a7e1471bce32635335d06dd Sandra Luengo <luchosandra@gmail.com> 1541609441 +0100	commit: muercielago completo, mapache primer movimiento
+3e0060c90e7710d07a7e1471bce32635335d06dd 3f1aa8a3accef72ee04abd4dba51b02d3c535f08 Sandra Luengo <luchosandra@gmail.com> 1541614513 +0100	commit: Ataque con intervalos en blanco a veces, recibe bien los golpes, con una pausa antes para no saltar
+3f1aa8a3accef72ee04abd4dba51b02d3c535f08 07180766224a3b37f67e1488606a4016d33c1e80 Sandra Luengo <luchosandra@gmail.com> 1541618957 +0100	commit: Ultimo commit del dia

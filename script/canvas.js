@@ -9,13 +9,19 @@ function Canvas(id) {
     this.height = 600;
     this.bat = new Bat(this.ctx, this.canvas, this.width, this.height, this);
     this.enemies = [];
-    this.enemy = new Enemy(this.ct, this.width, this.height, 0, 0, this)
+    this.enemy = new Enemy(this.canvas, this.ctx, this.width, this.height, 0, 0, this)
     this.framesCounter = 0;
     this.imgBackground = new Image();
-    this.imgBackground.src = 'img/fondo.png';
+    this.imgBackground.src = 'img/forest3.png';
     this.init();
 }
-Canvas.prototype.contentInit=function(){
+Canvas.prototype.contentInit = function () {
+    if (this.bat.life === 0) {
+        console.log('muerto');
+        clearInterval(this.idInterval);
+
+        this.end();
+    }
     this.clear();
     this.framesCounter++;
 
@@ -34,20 +40,15 @@ Canvas.prototype.contentInit=function(){
     this.enemies.forEach(function (enemy) { enemy.move(); });
 
     if (this.isCollision()) {
-
         this.bat.life -= 1;
     }
 
-    if (this.bat.life === 0) {
-        clearInterval(this.idInterval);
-       
-        this.end();
-    }
+
 
 }
 Canvas.prototype.init = function () {
     this.idInterval = setInterval(function () {
-       this.contentInit();
+        this.contentInit();
     }.bind(this), 1000 / this.fps);
 
 
@@ -60,7 +61,7 @@ Canvas.prototype.end = function () {
     this.enemies.length = 0;
 
     var endInterval = setInterval(function () {
-        
+
         this.framesCounter++;
         this.clear();
         this.drawBackground();
@@ -72,22 +73,22 @@ Canvas.prototype.end = function () {
         // debugger
         clearInterval(endInterval);
         clearInterval(this.idInterval);
-    }.bind(this), 133)
+    }.bind(this), 400)
 }
 Canvas.prototype.drawAll = function () {
     this.drawBackground();
 
     this.bat.drawBat();
-    
+
     this.enemies.forEach(function (enemy) { enemy.draw() });
 }
 Canvas.prototype.clear = function () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
 
-Canvas.prototype.drawBackground = function(){
+Canvas.prototype.drawBackground = function () {
     this.ctx.drawImage(this.imgBackground, 0, 0, this.canvas.width, this.canvas.height);
-   
+
 }
 
 
@@ -110,12 +111,19 @@ Canvas.prototype.killEnemies = function (move) {
             break;
     }
     this.framesCounter = 0;
-    this.bat.changeFrames(600, 160, 6, 20, 5, 'img/attack.png');
+    this.bat.changeFrames(600, 160, 6, 40, 5, 'img/attack.png');
+    
+    this.enemies.some(function (enemy) {
+
+        if (enemy.imgLineInfo.src === enemyType) {
+           
+            enemy.changeFrames(5, 20, 4, 'img/racconndie.png');
+        }
+    }.bind(this));
 
     setTimeout(function () {
-        this.framesCounter = 0;
+        
         this.bat.changeFrames(800, 200, 8, 7, 7, 'img/8_bats.png');
-
         this.enemies = this.enemies.filter(function (enemy) {
             if (enemy.imgLineInfo.src !== enemyType) {
 
@@ -130,7 +138,7 @@ Canvas.prototype.killEnemies = function (move) {
             }
         }.bind(this))
 
-    }.bind(this), 500)
+    }.bind(this), 1000)
 }
 Canvas.prototype.generateEnemy = function () {
 
@@ -177,13 +185,16 @@ Canvas.prototype.isCollision = function () {
         //debugger
         if (enemy.positionX + enemy.raccoonWidth >= this.bat.batPositionX &&
             this.bat.batPositionX + (this.bat.batWidth / this.bat.frames) > enemy.positionX &&
-            (enemy.raccoonHeight / enemy.frames) + enemy.positionY >= this.bat.batPositionY - 18) {
+            (enemy.raccoonHeight / enemy.frames) + enemy.positionY >= this.bat.batPositionY - 5) {
 
-            this.enemies.splice(i, 1);
+            console.log('herido');
+
+           
 
             this.framesCounter = 0;
 
             this.bat.changeFrames(400, 160, 4, 17, 3, 'img/batDamage.png');
+            enemy.changeFrames(5, 22, 4, 'img/raccoonAttackDie.png');
 
             clearInterval(this.idInterval);
 
@@ -193,19 +204,20 @@ Canvas.prototype.isCollision = function () {
                 this.drawBackground();
                 this.bat.drawBat();
                 this.enemies.forEach(function (enemy) { enemy.draw() });
-        
+
             }.bind(this), 1000 / this.fps);
 
 
             setTimeout(function () {
 
                 clearInterval(damageBat);
-                this.idInterval= setInterval(function(){
+                this.idInterval = setInterval(function () {
                     this.contentInit();
-                }.bind(this),1000 / this.fps);
+                }.bind(this), 1000 / this.fps);
                 this.bat.changeFrames(400, 200, 4, 17, 3, 'img/8_bats.png');
+                this.enemies.splice(i, 1);
 
-            }.bind(this),1000);
+            }.bind(this), 1000);
 
 
             return true

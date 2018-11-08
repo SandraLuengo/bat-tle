@@ -10,8 +10,8 @@ function Enemy(canvas, ctx, width, height, posX, posY, positionAttack) {
     this.raccoonHeight = 333;
     this.individualWidth=80;
     this.individualHeight=75;
-    this.dx = 0.5;
-    this.dy = 0.5;
+    this.dx = 0.3;
+    this.dy = 0.3;
     this.vy = 0.05;
     this.vx = 0.1;
     this.positionAttack = positionAttack;
@@ -37,6 +37,7 @@ Enemy.prototype.draw = function () {
 
     
     //void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    
 
     this.ctx.drawImage(this.img,0, this.frameIndex * Math.floor(this.raccoonHeight / this.frames),this.raccoonWidth,
      Math.floor(this.raccoonHeight / this.frames), this.positionX, this.positionY, this.raccoonWidth, this.individualHeight);
@@ -85,3 +86,18 @@ Enemy.prototype.move = function () {
 
 };
 
+Enemy.prototype.die=function(){
+
+}
+
+    
+ Enemy.prototype.changeFrames = function (frames, velFrames, numFramesMenosUno, src) {    
+    
+    this.frames = frames;
+    this.velFrames = velFrames;
+    this.numFramesMenosUno = numFramesMenosUno;
+    this.img.src = src;
+    this.frameIndex = 0;
+    this.draw();
+
+}
