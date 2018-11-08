@@ -37,12 +37,30 @@
         z-index: 99;
         background: transparent;
     }
+    #start-button:hover{
+        background-image: url('img/start2.png');
+    }
+    #start-button{
+        width:830px;
+        height: 400px;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        margin-left: -415px;
+        background-image: url('img/start.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 100;
+    }
 </style>
 
 <body>
-    <button id='start-button'>START</button>
+
+    <div id="start-button"></div>
+
     <canvas id="myCanvas" width="830" height="400" ></canvas>
     <canvas id="myCanvasDraw" width="830" height="400" ></canvas>
+    
 </body>
 
 </html>

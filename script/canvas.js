@@ -140,7 +140,7 @@ Canvas.prototype.killEnemies = function (move) {
             } else {
                 this.bat.points++;
                 console.log(this.bat.points)
-                if (this.bat.points === 2) {
+                if (this.bat.points === 30) {
 
 
                     this.mylastEnemy.generateAttacks();
