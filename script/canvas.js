@@ -12,7 +12,9 @@ function Canvas(id) {
     this.enemy = new Enemy(this.canvas, this.ctx, this.width, this.height, 0, 0, this)
     this.framesCounter = 0;
     this.imgBackground = new Image();
+    this.mylastEnemy = new LastEnemy(this,this.ctx, this.width, this.height,(this.width/2)-60,0,'top');
     this.imgBackground.src = 'img/forest3.png';
+    this.levelTwo=false;
     this.init();
 }
 Canvas.prototype.contentInit = function () {
@@ -113,16 +115,23 @@ Canvas.prototype.killEnemies = function (move) {
     this.framesCounter = 0;
     this.bat.changeFrames(600, 160, 6, 40, 5, 'img/attack.png');
     
+
     this.enemies.some(function (enemy) {
 
         if (enemy.imgLineInfo.src === enemyType) {
-           
+
             enemy.changeFrames(5, 20, 4, 'img/racconndie.png');
         }
     }.bind(this));
 
+    if(this.levelTwo){
+        this.mylastEnemy.lastBattle(enemyType);
+
+      
+    }
+
     setTimeout(function () {
-        
+
         this.bat.changeFrames(800, 200, 8, 7, 7, 'img/8_bats.png');
         this.enemies = this.enemies.filter(function (enemy) {
             if (enemy.imgLineInfo.src !== enemyType) {
@@ -131,8 +140,21 @@ Canvas.prototype.killEnemies = function (move) {
             } else {
                 this.bat.points++;
                 console.log(this.bat.points)
-                if (this.bat.points === 60) {
-                    alert('win');
+                if (this.bat.points === 1) {
+                    //alert('win');
+                  // debugger
+                    
+                    this.mylastEnemy.generateAttacks();
+                    this.levelTwo=true;
+                    
+                    clearInterval(this.idInterval);
+                    setTimeout(function(){
+                        this.clear();
+                        this.lastEnemy();
+                    }.bind(this),500)
+                    
+                    
+
                 }
                 return false;
             }
@@ -189,7 +211,7 @@ Canvas.prototype.isCollision = function () {
 
             console.log('herido');
 
-           
+
 
             this.framesCounter = 0;
 
@@ -226,3 +248,26 @@ Canvas.prototype.isCollision = function () {
         }
     }.bind(this));
 }; 
+
+Canvas.prototype.lastEnemy = function(){
+    this.framesCounter=0;
+
+    var lastEnemyInterval  = setInterval(function(){
+
+        this.framesCounter++;
+        this.clear();
+        this.drawBackground();
+        // debugger;
+        this.bat.drawBat();
+        this.mylastEnemy.draw();
+        this.mylastEnemy.move();
+        if (this.mylastEnemy.arrayAttacks.length == 0) {
+            this.clear();
+            clearInterval(lastEnemyInterval);
+            alert('win');
+        }
+        if(this.mylastEnemy.isCollision()){
+            alert('muerto');
+        }
+    }.bind(this),1000/this.fps);
+}
