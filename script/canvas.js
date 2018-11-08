@@ -140,7 +140,7 @@ Canvas.prototype.killEnemies = function (move) {
             } else {
                 this.bat.points++;
                 console.log(this.bat.points)
-                if (this.bat.points === 1) {
+                if (this.bat.points === 2) {
 
 
                     this.mylastEnemy.generateAttacks();
@@ -148,24 +148,15 @@ Canvas.prototype.killEnemies = function (move) {
 
                     clearInterval(this.idInterval);
                     this.enemies.length = 0;
-                    var levelTwoInterval;
-                    setTimeout(function () {
-
-                        levelTwoInterval = setInterval(function () {
-                            
-                                this.clear();
-                           
-                            this.mylastEnemy.drawLevelTwo();
-                        }.bind(this), 340)
-
-                    }.bind(this), 500)
+                    this.clear();
+                    this.mylastEnemy.drawLevelTwo();
 
                     setTimeout(function () {
                         this.clear();
-                        clearInterval(levelTwoInterval);
+
                         this.lastEnemy();
 
-                    }.bind(this), 4000)
+                    }.bind(this), 2000)
 
 
 
@@ -275,8 +266,10 @@ Canvas.prototype.lastEnemy = function () {
         this.mylastEnemy.draw();
         this.mylastEnemy.move();
         if (this.mylastEnemy.arrayAttacks.length == 0) {
-            this.clear();
+            console.log('fin');
+
             clearInterval(lastEnemyInterval);
+            this.clear();
             alert('win');
         }
         if (this.mylastEnemy.isCollision()) {

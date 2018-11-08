@@ -81,19 +81,6 @@ LastEnemy.prototype.isCollision = function () {
 
 LastEnemy.prototype.drawLevelTwo = function () {
 
-
-    this.ctx.drawImage(this.imgLevelTwo, 0, this.frameIndex * Math.floor(this.animationHeight / this.frames), this.canvas.width,
-        Math.floor(this.animationHeight / this.frames), 0, this.positionY, this.canvas.width, this.canvas.height);
-    this.animateImg();
+    this.ctx.drawImage(this.imgLevelTwo, 0,0, 830,400);
+    
 }
-
-LastEnemy.prototype.animateImg = function () {
-    if (this.frameIndex < 5) {
-        if (this.canvas.framesCounter % this.velFrames === 0) {
-            this.frameIndex += 1;
-
-
-            if (this.frameIndex > this.numFramesMenosUno) this.frameIndex = 0;
-        }
-    }
-};
