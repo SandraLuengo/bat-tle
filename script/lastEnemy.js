@@ -5,9 +5,16 @@ function LastEnemy(canvas, ctx, width, height, posX, posY, positionAttack) {
     this.img.src = 'img/badRaccoon.png';
     this.arrayAttacks = [];
     this.numberAttacks = 10;
-    this.dy = 0.2;
+    this.dy = 0.07;
     this.widthInd = 88;
     this.heightInd = 66;
+    this.frames = 6;
+    this.frameIndex = 0;
+    this.velFrames = 7;
+    this.numFramesMenosUno = 5;
+    this.animationHeight = 2798;
+    this.imgLevelTwo = new Image();
+    this.imgLevelTwo.src = 'img/level2.png';
 }
 
 LastEnemy.prototype = Object.create(Enemy.prototype);
@@ -71,3 +78,22 @@ LastEnemy.prototype.isCollision = function () {
         return false;
     }
 }
+
+LastEnemy.prototype.drawLevelTwo = function () {
+
+
+    this.ctx.drawImage(this.imgLevelTwo, 0, this.frameIndex * Math.floor(this.animationHeight / this.frames), this.canvas.width,
+        Math.floor(this.animationHeight / this.frames), 0, this.positionY, this.canvas.width, this.canvas.height);
+    this.animateImg();
+}
+
+LastEnemy.prototype.animateImg = function () {
+    if (this.frameIndex < 5) {
+        if (this.canvas.framesCounter % this.velFrames === 0) {
+            this.frameIndex += 1;
+
+
+            if (this.frameIndex > this.numFramesMenosUno) this.frameIndex = 0;
+        }
+    }
+};

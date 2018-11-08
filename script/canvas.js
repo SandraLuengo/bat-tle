@@ -12,9 +12,9 @@ function Canvas(id) {
     this.enemy = new Enemy(this.canvas, this.ctx, this.width, this.height, 0, 0, this)
     this.framesCounter = 0;
     this.imgBackground = new Image();
-    this.mylastEnemy = new LastEnemy(this,this.ctx, this.width, this.height,(this.width/2)-60,0,'top');
+    this.mylastEnemy = new LastEnemy(this, this.ctx, this.width, this.height, (this.width / 2) - 60, 0, 'top');
     this.imgBackground.src = 'img/forest3.png';
-    this.levelTwo=false;
+    this.levelTwo = false;
     this.init();
 }
 Canvas.prototype.contentInit = function () {
@@ -114,7 +114,7 @@ Canvas.prototype.killEnemies = function (move) {
     }
     this.framesCounter = 0;
     this.bat.changeFrames(600, 160, 6, 40, 5, 'img/attack.png');
-    
+
 
     this.enemies.some(function (enemy) {
 
@@ -124,10 +124,10 @@ Canvas.prototype.killEnemies = function (move) {
         }
     }.bind(this));
 
-    if(this.levelTwo){
+    if (this.levelTwo) {
         this.mylastEnemy.lastBattle(enemyType);
 
-      
+
     }
 
     setTimeout(function () {
@@ -141,19 +141,33 @@ Canvas.prototype.killEnemies = function (move) {
                 this.bat.points++;
                 console.log(this.bat.points)
                 if (this.bat.points === 1) {
-                    //alert('win');
-                  // debugger
-                    
+
+
                     this.mylastEnemy.generateAttacks();
-                    this.levelTwo=true;
-                    
+                    this.levelTwo = true;
+
                     clearInterval(this.idInterval);
-                    setTimeout(function(){
+                    this.enemies.length = 0;
+                    var levelTwoInterval;
+                    setTimeout(function () {
+
+                        levelTwoInterval = setInterval(function () {
+                            
+                                this.clear();
+                           
+                            this.mylastEnemy.drawLevelTwo();
+                        }.bind(this), 340)
+
+                    }.bind(this), 500)
+
+                    setTimeout(function () {
                         this.clear();
+                        clearInterval(levelTwoInterval);
                         this.lastEnemy();
-                    }.bind(this),500)
-                    
-                    
+
+                    }.bind(this), 4000)
+
+
 
                 }
                 return false;
@@ -201,8 +215,7 @@ Canvas.prototype.generateEnemy = function () {
 };
 
 Canvas.prototype.isCollision = function () {
-    // colisiones genéricas 
-    // (p.x + p.w > o.x && o.x + o.w > p.x && p.y + p.h > o.y && o.y + o.h > p.y )
+
     return this.enemies.some(function (enemy, i) {
         //debugger
         if (enemy.positionX + enemy.raccoonWidth >= this.bat.batPositionX &&
@@ -247,12 +260,12 @@ Canvas.prototype.isCollision = function () {
             return false;
         }
     }.bind(this));
-}; 
+};
 
-Canvas.prototype.lastEnemy = function(){
-    this.framesCounter=0;
+Canvas.prototype.lastEnemy = function () {
+    this.framesCounter = 0;
 
-    var lastEnemyInterval  = setInterval(function(){
+    var lastEnemyInterval = setInterval(function () {
 
         this.framesCounter++;
         this.clear();
@@ -266,8 +279,8 @@ Canvas.prototype.lastEnemy = function(){
             clearInterval(lastEnemyInterval);
             alert('win');
         }
-        if(this.mylastEnemy.isCollision()){
+        if (this.mylastEnemy.isCollision()) {
             alert('muerto');
         }
-    }.bind(this),1000/this.fps);
+    }.bind(this), 1000 / this.fps);
 }
