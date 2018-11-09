@@ -19,6 +19,7 @@ function Canvas(id) {
     this.imgEnd.src = 'img/lost.png';
     this.imgWin = new Image();
     this.imgWin.src = 'img/winner.png';
+    this.myAudio = new Audio('music/musica_juego.mp3');
     this.init();
 }
 Canvas.prototype.contentInit = function () {
@@ -53,6 +54,9 @@ Canvas.prototype.contentInit = function () {
 
 }
 Canvas.prototype.init = function () {
+
+    this.myAudio.play();
+
     this.idInterval = setInterval(function () {
         this.contentInit();
     }.bind(this), 1000 / this.fps);
@@ -292,7 +296,7 @@ Canvas.prototype.backgroundEnd = function () {
     }.bind(this), 500)
 
     setTimeout(function(){
-        console.log('entro')
+        this.myAudio.pause();
         location.reload();
     }.bind(this),2000)
 }
@@ -305,6 +309,7 @@ Canvas.prototype.backgroundWin = function () {
     }.bind(this), 500)
 
     setTimeout(function(){
+        this.myAudio.pause();
         location.reload();
     }.bind(this),2000)
 }
