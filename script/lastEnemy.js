@@ -34,7 +34,7 @@ LastEnemy.prototype.generateAttacks = function () {
         this.arrayAttacks.push(this.img[i]);
     }
 
-    console.log(this.arrayAttacks);
+ 
 }
 LastEnemy.prototype.draw = function () {
     var av = 0;
@@ -57,12 +57,12 @@ LastEnemy.prototype.move = function () {
 }
 
 LastEnemy.prototype.lastBattle = function (enemyType) {
-    console.log(enemyType);
-    var url = `file:///home/sandra/Escritorio/PROYECT1/${enemyType}`;
-    console.log(this.arrayAttacks[0].src);
-    console.log(url);
+  
+   
+    var src=this.arrayAttacks[0].src.substr(40,(this.arrayAttacks[0].src).length-1);
+    
 
-    if (this.arrayAttacks[0].src == url) {
+    if (src == enemyType) {
         this.arrayAttacks.shift(this.arrayAttacks[0]);
     }
 

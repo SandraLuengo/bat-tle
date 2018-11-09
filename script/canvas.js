@@ -140,7 +140,7 @@ Canvas.prototype.killEnemies = function (move) {
             } else {
                 this.bat.points++;
                 console.log(this.bat.points)
-                if (this.bat.points === 30) {
+                if (this.bat.points === 3) {
 
 
                     this.mylastEnemy.generateAttacks();
@@ -213,10 +213,6 @@ Canvas.prototype.isCollision = function () {
             this.bat.batPositionX + (this.bat.batWidth / this.bat.frames) > enemy.positionX &&
             (enemy.raccoonHeight / enemy.frames) + enemy.positionY >= this.bat.batPositionY - 5) {
 
-            console.log('herido');
-
-
-
             this.framesCounter = 0;
 
             this.bat.changeFrames(400, 160, 4, 17, 3, 'img/batDamage.png');
@@ -271,9 +267,18 @@ Canvas.prototype.lastEnemy = function () {
             clearInterval(lastEnemyInterval);
             this.clear();
             alert('win');
+            this.backgroundWin();
         }
         if (this.mylastEnemy.isCollision()) {
-            alert('muerto');
+            //alert('muerto');
+            this.end();
+            this.backgroundEnd();
         }
     }.bind(this), 1000 / this.fps);
+}
+Canvas.prototype.backgroundEnd = function(){
+
+}
+Canvas.prototype.backgroundWin = function(){
+    
 }
