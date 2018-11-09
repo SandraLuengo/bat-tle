@@ -80,7 +80,9 @@ LastEnemy.prototype.isCollision = function () {
 }
 
 LastEnemy.prototype.drawLevelTwo = function () {
-
-    this.ctx.drawImage(this.imgLevelTwo, 0,0, 830,400);
+  
+        this.canvas.clear();
+        this.ctx.drawImage(this.imgLevelTwo, 0,0, 830,400);
+  
     
 }

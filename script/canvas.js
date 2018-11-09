@@ -15,6 +15,10 @@ function Canvas(id) {
     this.mylastEnemy = new LastEnemy(this, this.ctx, this.width, this.height, (this.width / 2) - 60, 0, 'top');
     this.imgBackground.src = 'img/forest3.png';
     this.levelTwo = false;
+    this.imgEnd = new Image();
+    this.imgEnd.src = 'img/lost.png';
+    this.imgWin = new Image();
+    this.imgWin.src = 'img/winner.png';
     this.init();
 }
 Canvas.prototype.contentInit = function () {
@@ -73,8 +77,11 @@ Canvas.prototype.end = function () {
 
     setTimeout(function () {
         // debugger
+        
         clearInterval(endInterval);
         clearInterval(this.idInterval);
+        this.backgroundEnd();
+
     }.bind(this), 400)
 }
 Canvas.prototype.drawAll = function () {
@@ -130,7 +137,7 @@ Canvas.prototype.killEnemies = function (move) {
 
     }
 
-    setTimeout(function () {
+    this.setTimeout= setTimeout(function () {
 
         this.bat.changeFrames(800, 200, 8, 7, 7, 'img/8_bats.png');
         this.enemies = this.enemies.filter(function (enemy) {
@@ -257,7 +264,7 @@ Canvas.prototype.lastEnemy = function () {
         this.framesCounter++;
         this.clear();
         this.drawBackground();
-        // debugger;
+
         this.bat.drawBat();
         this.mylastEnemy.draw();
         this.mylastEnemy.move();
@@ -265,20 +272,39 @@ Canvas.prototype.lastEnemy = function () {
             console.log('fin');
 
             clearInterval(lastEnemyInterval);
+            clearInterval(this.idInterval);
             this.clear();
-            alert('win');
             this.backgroundWin();
         }
         if (this.mylastEnemy.isCollision()) {
-            //alert('muerto');
             this.end();
+            clearInterval(lastEnemyInterval);
             this.backgroundEnd();
         }
     }.bind(this), 1000 / this.fps);
 }
-Canvas.prototype.backgroundEnd = function(){
+Canvas.prototype.backgroundEnd = function () {
 
+    setTimeout(function () {
+        this.clear();
+        clearTimeout(this.setTimeout);
+        this.ctx.drawImage(this.imgEnd, 0, 0, 830, 400);
+    }.bind(this), 500)
+
+    setTimeout(function(){
+        console.log('entro')
+        location.reload();
+    }.bind(this),2000)
 }
-Canvas.prototype.backgroundWin = function(){
-    
+Canvas.prototype.backgroundWin = function () {
+   
+    setTimeout(function () {
+        this.clear();
+        clearTimeout(this.setTimeout);
+        this.ctx.drawImage(this.imgWin, 0, 0, 830, 400);
+    }.bind(this), 500)
+
+    setTimeout(function(){
+        location.reload();
+    }.bind(this),2000)
 }
