@@ -59,7 +59,7 @@ LastEnemy.prototype.move = function () {
 LastEnemy.prototype.lastBattle = function (enemyType) {
   
    
-    var src=this.arrayAttacks[0].src.substr(40,(this.arrayAttacks[0].src).length-1);
+    var src=this.arrayAttacks[0].src.substr(38,(this.arrayAttacks[0].src).length-1);
     console.log(src);
 
     if (src == enemyType) {
