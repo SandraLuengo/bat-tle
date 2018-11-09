@@ -24,7 +24,7 @@ function Canvas(id) {
 }
 Canvas.prototype.contentInit = function () {
     if (this.bat.life === 0) {
-        console.log('muerto');
+      
         clearInterval(this.idInterval);
 
         this.end();
@@ -80,7 +80,7 @@ Canvas.prototype.end = function () {
     }.bind(this), 1000 / this.fps);
 
     setTimeout(function () {
-        // debugger
+     
         
         clearInterval(endInterval);
         clearInterval(this.idInterval);
@@ -150,7 +150,7 @@ Canvas.prototype.killEnemies = function (move) {
                 return true;
             } else {
                 this.bat.points++;
-                console.log(this.bat.points)
+              
                 if (this.bat.points === 3) {
 
 
@@ -219,7 +219,7 @@ Canvas.prototype.generateEnemy = function () {
 Canvas.prototype.isCollision = function () {
 
     return this.enemies.some(function (enemy, i) {
-        //debugger
+        
         if (enemy.positionX + enemy.raccoonWidth >= this.bat.batPositionX &&
             this.bat.batPositionX + (this.bat.batWidth / this.bat.frames) > enemy.positionX &&
             (enemy.raccoonHeight / enemy.frames) + enemy.positionY >= this.bat.batPositionY - 5) {
@@ -273,7 +273,7 @@ Canvas.prototype.lastEnemy = function () {
         this.mylastEnemy.draw();
         this.mylastEnemy.move();
         if (this.mylastEnemy.arrayAttacks.length == 0) {
-            console.log('fin');
+         
 
             clearInterval(lastEnemyInterval);
             clearInterval(this.idInterval);

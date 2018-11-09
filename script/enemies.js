@@ -47,7 +47,7 @@ Enemy.prototype.draw = function () {
 
 
 Enemy.prototype.animateImgEnemy = function () {
-    // debugger
+  
 
     if (this.canvas.framesCounter % this.velFrames === 0) {
         this.frameIndex += 1;

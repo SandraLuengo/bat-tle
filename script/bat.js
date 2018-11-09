@@ -40,7 +40,7 @@ Bat.prototype.drawBat = function () {
 
 
 Bat.prototype.animateImg = function () {
-    // debugger
+    
 
     // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
     if (this.game.framesCounter % this.velFrames === 0) {
