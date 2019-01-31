@@ -1,20 +1,9 @@
 # BAT-TLE
-## Mi primer juego en HTML Canvas.
+## Juego creado con HTML5 Canvas
 
 link: https://sandraluengo.github.io/bat-tle/
 
 ### Instrucciones:
 
-Debes matar a todos los mapaches dibujando con el ratón el simbolo de su frente.
+Debes de eliminar a todos los contrincantes, en este caso a todos los mapaches, dibujando sobre el canvas el simbolo que tienen en la frente, bien con el raton o utilizando el trackpad de tu ordenador
 
-## Que cambiaría si volviese a empezar :
-
-- Hacer un diagrama de clases antes de empezar, para evitarme problemas de lógica y estructuración.
-
-## Futuras mejoras:
-
-- Que las animaciones sean mas fluidas, más niveles, y un contador de vida y puntos
-
-##  Funcionalidad que mas me ha costado:
-
-- Que el trazo del raton se coloree segun su forma, y gestionar todos los setInterval y setTimeOut
